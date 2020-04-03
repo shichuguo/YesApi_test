@@ -36,7 +36,7 @@ def creat_case_file(filename):
     '''从data目录中读取多有的yaml文件，使用case_template.txt模板，
     生成测试用例文件，放到case目录下'''
     file_list = os.listdir(DATA_PATH)
-    template_file = os.path.join(BASE_PATH, filename)
+    template_file = os.path.join(TEMPLATE_PATH, filename)
     for lis in file_list:
         if lis.endswith('.yaml') or lis.endswith('.yml'):
             data_file = lis.replace('.yaml', '').replace('.yml', '')
@@ -51,7 +51,7 @@ def creat_case_file(filename):
 
 
 # 获取某用户的uuid和token
-def get_token(app_key, username, password,url):
+def get_token(app_key, username, password, url):
     password = hash_code(password)  # 加密密码
     login_data = {'app_key': app_key,
                   'username': username,

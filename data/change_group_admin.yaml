@@ -1,0 +1,255 @@
+#只检测会员分组接口，填写必填项
+#测试修改会员分组，合法填写必填项
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': adminad
+ check:
+   - ret=200
+   - before_role=
+   - after_role=
+   - msg=v2.1.0 果创云开放接口 app.user.changerole
+ test: "接口500错误,修改失败"
+
+#修改会员分组，使用非法的app_key
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA66
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': 1
+ check:
+   - ret=406
+   - 当前接口=app.user.changerole
+   - app_key=e0af074404b33ce74d98f1ad4047ea66
+   - msg=客户端非法请求：非法app_key
+ test: "非法app_key修改会员分组失败"
+
+#修改会员分组，不改变更改前后的分组
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': 123@456
+ check:
+   - ret=200
+   - err_code=
+   - err_msg=角色没有变化
+   - msg=v2.1.0 果创云开放接口
+ test: "接口500错误"
+
+#修改会员分组，使用非法的uuid
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A81
+  'new_role': year
+ check:
+   - ret=400
+   - msg=客户端非法请求：other_uuid.len应该大于或等于32
+   - 当前接口=app.user.changerole
+   - app_key=e0af074404b33ce74d98f1ad4047ea67
+   - other_uuid=0dc3d810e60f38b1bc91a3b79375a81
+ test: "修改失败,uuid非法"
+
+#修改会员分组失败，使用11位的组名
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': abcde12345a
+ key: False
+ check:
+   - ret=400
+   - msg=客户端非法请求：new_role.len应该小于等于10
+   - 当前接口=app.user.changerole
+   - new_role=abcde12345a
+ test: "修改会员分组失败,组名超长"
+
+#修改会员分组失败，新组名为空
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role':
+ key: False
+ check:
+   - ret=400
+   - msg=客户端非法请求
+   - s=app.user.changerole
+   - app_key=e0af074404b33ce74d98f1ad4047ea67
+ test: "修改会员分组失败,组名为空"
+
+#修改分组成功，组名长度为1
+-
+ url: http://hn216.api.yesapi.cn/
+ method: get
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': c
+ check:
+   - ret=200
+   - after_role=
+   - err_code=
+   - before_role=
+   - msg=v2.1.0 果创云开放接口
+ test: "接口500错误"
+
+#使用全小写的app_key，修改失败
+-
+ url: http://hn216.api.yesapi.cn/
+ method: get
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': e0af074404b33ce74d98f1ad4047ea67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': admin
+ check:
+   - ret=406
+   - 当前接口=app.user.changerole
+   - s=app.user.changerole
+   - app_key=e0af074404b33ce74d98f1ad4047ea67
+   - msg=客户端非法请求
+ test: "修改会员分组失败,app_key非法"
+
+#修改分组为admin，修改成功
+-
+ url: http://hn216.api.yesapi.cn/
+ method: get
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': admin
+ check:
+   - ret=200
+   - err_code=0
+ test: "接口500错误"
+
+#检测会员分组接口，填写所有项
+#修改会员分组，填写所有项
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ login_data:
+   's': App.User.Login
+   'app_key': E0AF074404B33CE74D98F1AD4047EA67
+   'username': aaa
+   'password': '123456'
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'uuid': 2408070412BA91FB4E764291E9A92EA9
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': 123
+ key:
+ check:
+   - ret=200
+   - err_code=0
+   - msg=v2.1.0 果创云开放接口
+ test: "接口500错误"
+
+#修改会员分组，uuid与other_uuid相同
+-
+ url: http://hn216.api.yesapi.cn/
+ method: get
+ login_data:
+   's': App.User.Login
+   'app_key': E0AF074404B33CE74D98F1AD4047EA67
+   'username': aaa
+   'password': '123456'
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'uuid': 2408070412BA91FB4E764291E9A92EA9
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': 123
+ key:
+ check:
+   - ret=200
+   - err_code=
+   - before_role=
+   - after_role=
+   - msg=v2.1.0 果创云开放接口
+ test: "接口500错误"
+
+#修改会员分组失败，使用错误的token
+-
+ url: http://hn216.api.yesapi.cn/
+ method: get
+ login_data:
+   's': App.User.Login
+   'app_key': E0AF074404B33CE74D98F1AD4047EA67
+   'username': aaa
+   'password': '123456'
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'uuid': 2408070412BA91FB4E764291E9A92EA9
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': 123
+ key:
+ token_key:
+ check:
+   - ret=400
+   - msg=客户端非法请求
+   - 当前接口=app.user.changerole
+ test: "非法token修改会员分组失败"
+
+#修改会员分组，只传token不传uuid
+-
+ url: http://hn216.api.yesapi.cn/
+ method: get
+ login_data:
+   's': App.User.Login
+   'app_key': E0AF074404B33CE74D98F1AD4047EA67
+   'username': aaa
+   'password': '123456'
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': name
+ key:
+ check:
+   - ret=200
+   - msg=v2.1.0 果创云开放接口
+   - before_role=
+   - after_role=
+ test: "接口500错误"
+
+#修改会员成功，只传uuid，不传token
+-
+ url: http://hn216.api.yesapi.cn/
+ method: post
+ change_data:
+  's': App.User.ChangeRoleForAdmin
+  'app_key': E0AF074404B33CE74D98F1AD4047EA67
+  'uuid': 2408070412BA91FB4E764291E9A92EA9
+  'other_uuid': 0DC3D810E60F38B1BC91A3B79375A892
+  'new_role': 123
+ check:
+   - ret=200
+   - err_code=
+   - msg=v2.1.0 果创云开放接口
+ test: "接口500错误"
