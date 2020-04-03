@@ -39,7 +39,8 @@ class GetUserLongList(unittest.TestCase):
             r = requests.get(url=case.get('url_getlist'),params=data) #发送get请求
         res = r.text
         results = set_res_data(res)
-        if case.get('check_flag'): #断言
+        # 断言
+        if case.get('check_flag'):
             self.assertEqual(check,res)
         else:
             for c in check:
