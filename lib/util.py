@@ -50,8 +50,7 @@ def creat_case_file(filename):
                     f.write(content)
 
 # 获取某用户的uuid和token
-def get_token(app_key, username, password):
-    url = 'http://hn216.api.yesapi.cn/?s=App.User.Login'
+def get_token(app_key, username, password,url):
     password = hash_code(password)  # 加密密码
     login_data = {'app_key': app_key,
                   'username': username,
