@@ -34,11 +34,11 @@ class MultiProfile(unittest.TestCase):
         if isinstance(uuid, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            data['uuid'], temp = get_token(url, app_key, username, password)
+            data['uuid'], temp = get_token(app_key, username, password, url)
         if isinstance(token, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            temp, data['token'] = get_token(url, app_key, username, password)
+            temp, data['token'] = get_token(app_key, username, password, url)
 
         # 判断请求方法，并发送请求
         if method == 'get':
@@ -68,14 +68,19 @@ class MultiProfile(unittest.TestCase):
                         # 有数据时
                         if m_data.get(data_key) == 'len_uuids':
                             # print(res_data)
-
-                            self.assertEqual(len(res_data.get(data_key)), len(uuids.split(',')))
+                            count = 0
+                            # 通过uuid长度判断合法uuid数量
+                            for i in uuids.split(','):
+                                if len(i) == 32:
+                                    count = count + 1
+                            self.assertEqual(len(res_data.get(data_key)), count)
                         # 无数据时
                         else:
                             self.assertEqual(res_data.get(data_key), m_data.get(data_key))
                     # 处理data的普通数据
                     else:
                         self.assertEqual(m_data.get(key), res_data.get(key))
+
 
 if __name__ == '__main__':
     unittest.main()
