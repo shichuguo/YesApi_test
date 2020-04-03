@@ -49,9 +49,9 @@ def creat_case_file(filename):
                 with open(os.path.join(CASE_PATH, "test_{}.py".format(data_file)), 'w', encoding='utf-8') as f:
                     f.write(content)
 
+
 # 获取某用户的uuid和token
-def get_token(app_key, username, password):
-    url = 'http://hn216.api.yesapi.cn/?s=App.User.Login'
+def get_token(url, app_key, username, password):
     password = hash_code(password)  # 加密密码
     login_data = {'app_key': app_key,
                   'username': username,
