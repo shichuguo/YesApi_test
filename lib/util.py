@@ -49,6 +49,7 @@ def creat_case_file(filename):
                 with open(os.path.join(CASE_PATH, "test_{}.py".format(data_file)), 'w', encoding='utf-8') as f:
                     f.write(content)
 
+
 # 获取某用户的uuid和token
 def get_token(app_key, username, password,url):
     password = hash_code(password)  # 加密密码
