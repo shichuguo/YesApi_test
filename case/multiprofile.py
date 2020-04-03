@@ -9,6 +9,7 @@ import unittest
 import ddt
 import requests
 from setting import *
+from lib.util import get_token
 
 
 @ddt.ddt
@@ -23,8 +24,22 @@ class MultiProfile(unittest.TestCase):
         url = cases.get('url')
         method = cases.get('method').lower()
         data = cases.get('data')
+        app_key = data.get('app_key')
+        uuid = data.get('uuid')
+        token = data.get('token')
         m_assert = cases.get('assert')
+        print(data)
+        # 分开判断非必填
+        if isinstance(uuid, dict):
+            username = uuid.get('username')
+            password = uuid.get('password')
+            data[uuid], temp = get_token(app_key, username, password)
+        if isinstance(token, dict):
+            username = uuid.get('username')
+            password = uuid.get('password')
+            temp, data[token] = get_token(app_key, username, password)
 
+        print(data)
         # 判断请求方法，并发送请求
         if method == 'get':
             res = requests.get(url, params=data)
@@ -40,11 +55,12 @@ class MultiProfile(unittest.TestCase):
             if key == 'ret':
                 self.assertEqual(res.get(key), m_assert.get(key))
             # data下数据
-            elif key == 'err_code' or key =='err_msg':
+            elif key == 'err_code' or key == 'err_msg':
                 self.assertEqual(res_data.get(key), m_assert.get(key))
             # info_list长度
             elif key == 'info_list':
                 self.assertEqual(len(res_data.get(key)), len(data.get('uuids').split(',')))
 
-    if __name__ == '__main__':
-        unittest.main()
+
+if __name__ == '__main__':
+    unittest.main()
