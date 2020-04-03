@@ -10,7 +10,6 @@ from pathlib import Path
 
 
 BASE_PATH = Path(__file__).absolute().parent  #工程的绝对路径
-
 p = Path(BASE_PATH)
 
 DATA_PATH = p.joinpath("data")      #数据路径
