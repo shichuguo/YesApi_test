@@ -34,12 +34,7 @@ class MultiProfile(unittest.TestCase):
         if isinstance(uuid, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            # 如果token与uuid配套
-            if token == 'uuid':
-                data['uuid'], data['token'] = get_token(app_key, username, password, url)
-            # 如果不配套，就只取uuid
-            else:
-                data['uuid'], temp = get_token(app_key, username, password, url)
+            data['uuid'], temp = get_token(app_key, username, password, url)
         if isinstance(token, dict):
             username = uuid.get('username')
             password = uuid.get('password')
