@@ -139,3 +139,16 @@
     ret: 400
     data: {}
     msg: 客户端非法请求：uuid.len应该小于等于32
+
+#- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+#  method: get
+#  doc: 015，uuid超32位，批量获取会员信息失败
+#  data:
+#    app_key: 756E4045BC42D16FAAAC53E674AA099D
+#    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+#    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+#    token: ~
+#  assert:
+#    ret: 400
+#    data: {}
+#    msg: 客户端非法请求：uuid.len应该小于等于32
