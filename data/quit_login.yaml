@@ -1,0 +1,374 @@
+- #get请求会员退出登录成功
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  detail:
+    "1退出登录成功"
+- #post请求会员退出登录成功
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: post
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  detail:
+    "2退出登录成功"
+- #appkey为空格_退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: post
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key:
+    is_allow_many: '1'
+    client: chrome
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：缺少必要参数app_key
+  detail:
+    "3退出登录失败"
+- #appkey为不存在的_退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: post
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: 123
+    is_allow_many: '1'
+    client: chrome
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "4退出登录失败"
+- #appkey为别人的_退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: post
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: 123
+    is_allow_many: '1'
+    client: chrome
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "5退出登录失败"
+- #appkey长度比规定长度小1_退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: post
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: E0AF074404B33CE74D98F1AD4047EA6
+    is_allow_many: '1'
+    client: chrome
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "6退出登录失败"
+- #app_key比规定长度多1_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A233
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "7退出登录失败"
+- #app_key含有空格_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168F BE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "8退出登录失败"
+- #不存在的uuid_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: 111111111111111111111111111111111
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "9退出登录失败"
+- #uuid长度少1_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E29
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "10退出登录失败"
+- #uuid长度多1_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E2951
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "11退出登录失败"
+- #uuid含有空格_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A 3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "12退出登录失败"
+- #uuid含有特殊字符_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295!
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "13退出登录失败"
+- #错误的token会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: false
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "14退出登录失败"
+- #token长度少一_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  less: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "15退出登录失败"
+- #token长度多一_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  more: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "16退出登录失败"
+
+- #过期token_会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  outdated: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "17退出登录失败"
+- #token为空会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: ~
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "18退出登录失败"
+- #app_key为null请求会员退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: get
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: null
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "19退出登录失败"
+- #appkey为空_退出登录失败
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  quit_login_url: http://hn216.api.yesapi.cn/
+  method: post
+  quit_login_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: ~
+    is_allow_many: '1'
+    client: chrome
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：缺少必要参数app_key
+  detail:
+    "20退出登录失败"
