@@ -44,6 +44,6 @@ class GetUserLongList(unittest.TestCase):
             self.assertEqual(check,res)
         else:
             for c in check:
-                self.assertIn(c,results) #循环判断结果
+                self.assertIn(c,results)
 if __name__ == '__main__':
     unittest.main()
