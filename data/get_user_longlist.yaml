@@ -1,0 +1,333 @@
+-
+  description: 用例01：必填项传参，合法app_key，post请求，极速获取用户长列表成功
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例02：必填项传参，合法app_key，get请求，极速获取用户长列表成功
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: get
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例03：所有选项传参，合法数据，post请求，极速获取用户长列表成功
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+    page: 1
+    perpage: 1
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例04：所有选项传参，合法数据，get请求，极速获取用户长列表成功
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: get
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+    page: 2
+    perpage: 100
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例05：合法app_key和最大perpage，极速获取用户长列表成功
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: get
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    perpage: 10000
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例06：正确位数，值错误的32位app_key，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACB
+  check:
+    - ret=406
+    - data={}
+    - msg=客户端非法请求：非法app_key
+-
+  description: 用例07：小写的app_key，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: aba178a701e233bf4762bb4e48514aca
+  check:
+    - ret=406
+    - data={}
+    - msg=客户端非法请求：非法app_key
+-
+  description: 用例08：长度不正确，31位的app_key，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514AC
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：app_key.len应该
+-
+  description: 用例09：长度不正确，33位的app_key，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACAB
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：app_key.len应该
+-
+  description: 用例10：app_key为空，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：app_key.len应该
+-
+  description: 用例11：app_key为None，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ~
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：缺少必要参数app_key
+- #用例12失败，任意的32位uuid都能获取成功
+  description: 用例12：正确位数，值错误的32位uuid，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912F932BB8EB4F005DA2F00D3700C1
+  check:
+    - ret=200
+    - err_code=1
+    - err_msg=客户端非法请求：登录会话已过期，请重新登录
+-
+  description: 用例13：小写的uuid，极速获取用户长列表成功
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912f932bb8eb4fd85da2febd37f0c9
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+- #用例14失败，未做最短长度限制
+  description: 用例14：长度不正确，31位的uuid，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912F932BB8EB4F005DA2F00D3700C
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：uuid.len应该
+-
+  description: 用例15：长度不正确，33位的uuid，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912F932BB8EB4FD85DA2FEBD37F0C9F
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：uuid.len应该
+-
+  description: 用例16：登录后退出，用过期token极速获取用户长列表失败
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  url_logout: http://hd215.api.yesapi.cn/?s=App.User.Logout
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    s: App.User.Check
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  logout:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  check:
+    - ret=200
+    - err_code=1
+    - err_msg=客户端非法请求：登录会话已过期，请重新登录
+- #用例17失败，未对token值进行校验，任意64位的token都行
+  description: 用例17：正确位数，值错误的64位token，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    token: 31B0B65E86B98BF86E085B789588B43CB719AAF54724A8FD382E8000000000@&
+  check:
+    - ret=200
+    - err_code=1
+    - err_msg=客户端非法请求：登录会话已过期，请重新登录
+-
+  description: 用例18：小写的token，极速获取用户长列表成功
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    token: 31b0b65e86b98bf86e085b789588b43cb719aaf54724a8fd382e8f0c3f658cbe
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例19：长度不正确，63位的token，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    token: 31B0B65E86B98BF86E085B789588B43CB719AAF54724A8FD382E8F0C3F658CB
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：token.len应该
+-
+  description: 用例20：长度不正确，65位的token，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    token: 31B0B65E86B98BF86E085B789588B43CB719AAF54724A8FD382E8F0C3F658CBEE
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：token.len应该
+-
+  description: 用例21：page为小数，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    page: 1.1
+  check_flag: true
+  check: ''
+-
+  description: 用例22：page为负数，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    page: -1
+  check_flag: true
+  check: ''
+-
+  description: 用例23：page为0，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    page: 0
+  check_flag: true
+  check: ''
+-
+  description: 用例24：page为字符串，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    page: "string"
+  check_flag: true
+  check: ''
+-
+  description: 用例25：page为特殊字符，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    page: ^%$#@!
+  check_flag: true
+  check: ''
+-
+  description: 用例26：perpage为小数，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    perpage: 2.1
+  check_flag: true
+  check: ''
+-
+  description: 用例27：perpage为负数，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    page: -1
+  check_flag: true
+  check: ''
+-
+  description: 用例28：perpage为0，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    perpage: 0
+  check_flag: true
+  check: ''
+-
+  description: 用例29：perpage为字符串，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    perpage: "string"
+  check_flag: true
+  check: ''
+-
+  description: 用例30：perpage为特殊字符，极速获取用户长列表失败
+  url_getlist: http://hd215.api.yesapi.cn/?s=App.User.FastGetUserLongList
+  methods: post
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    perpage: ^$$%!
+  check_flag: true
+  check: ''

@@ -1,0 +1,384 @@
+-
+  description: 用例01：合法数据，post请求，检测登录状态成功
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例02：合法数据，get请求，检测登录状态成功
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: get
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例03：正确位数，值错误的32位app_key，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACB
+    uuid: ''
+    token: ''
+  check:
+    - ret=406
+    - data={}
+    - msg=客户端非法请求：非法app_key
+-
+  description: 用例04：小写的app_key，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: aba178a701e233bf4762bb4e48514aca
+    uuid: ''
+    token: ''
+  check:
+    - ret=406
+    - data={}
+    - msg=客户端非法请求：非法app_key
+-
+  description: 用例05：长度不正确，31位的app_key，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514AC
+    uuid: ''
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：app_key.len应该
+-
+  description: 用例06：长度不正确，33位的app_key，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACAB
+    uuid: ''
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：app_key.len应该
+-
+  description: 用例07：app_key为空，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ''
+    uuid: ''
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：app_key.len应该
+-
+  description: 用例08：app_key为None，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    app_key: ~
+    uuid: ''
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：缺少必要参数app_key
+-
+  description: 用例09：正确位数，值错误的32位uuid，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: token
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912F932BB8EB4FD85DA2FEBD37F0C1
+    token: ''
+  check:
+    - ret=200
+    - err_code=1
+    - err_msg=客户端非法请求：登录会话已过期，请重新登录
+-
+  description: 用例10：小写的uuid，检测登录状态成功
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: token
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912f932bb8eb4fd85da2febd37f0c9
+    token: ''
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例11：长度不正确，31位的uuid，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: token
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912F932BB8EB4FD85DA2FEBD37F0C
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：uuid.len应该
+-
+  description: 用例12：长度不正确，33位的uuid，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: token
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: 05912F932BB8EB4FD85DA2FEBD37F0C9F
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：uuid.len应该
+-
+  description: 用例13：uuid为空，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: token
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：uuid.len应该
+-
+  description: 用例14：uuid为None，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: token
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ~
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：缺少必要参数uuid
+-
+  description: 用例15：登录后退出，token过期，过期token检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  url_logout: http://hd215.api.yesapi.cn/?s=App.User.Logout
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: all
+  data:
+    s: App.User.Check
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  logout:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  check:
+    - ret=200
+    - err_code=1
+    - err_msg=客户端非法请求：登录会话已过期，请重新登录
+-
+  description: 用例16：正确位数，值错误的64位token，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: uuid
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: 31B0B65E86B98BF86E085B789588B43CB719AAF54724A8FD382E8F0C3F658CBF
+  check:
+    - ret=200
+    - err_code=1
+    - err_msg=客户端非法请求：登录会话已过期，请重新登录
+-
+  description: 用例17：小写的token，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: uuid
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: 31b0b65e86b98bf86e085b789588b43cb719aaf54724a8fd382e8f0c3f658cbe
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+-
+  description: 用例18：长度不正确，63位的token，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: uuid
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: 31B0B65E86B98BF86E085B789588B43CB719AAF54724A8FD382E8F0C3F658CB
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：token.len应该
+-
+  description: 用例19：长度不正确，65位的token，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: uuid
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: 31B0B65E86B98BF86E085B789588B43CB719AAF54724A8FD382E8F0C3F658CBEE
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：token.len应该
+-
+  description: 用例20：token为空，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: uuid
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ''
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：token.len应该
+-
+  description: 用例21：token为None，检测登录状态提示异常
+  url: http://hd215.api.yesapi.cn/?s=App.User.Login
+  url_check: http://hd215.api.yesapi.cn/?s=App.User.Check
+  methods: post
+  login:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    username: test
+    password: 910910lxr
+  set_flag: uuid
+  data:
+    app_key: ABA178A701E233BF4762BB4E48514ACA
+    uuid: ''
+    token: ~
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求：缺少必要参数token
