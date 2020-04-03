@@ -67,11 +67,12 @@ class MultiProfile(unittest.TestCase):
                     if data_key == 'info_list':
                         # 有数据时
                         if m_data.get(data_key) == 'len_uuids':
+                            # print(res_data)
+
                             self.assertEqual(len(res_data.get(data_key)), len(uuids.split(',')))
-                        # 无数据是
+                        # 无数据时
                         else:
-                            print(res_data)
-                            self.assertEqual(len(res_data.get(data_key)), m_data.get(key))
+                            self.assertEqual(res_data.get(data_key), m_data.get(data_key))
                     # 处理data的普通数据
                     else:
                         self.assertEqual(m_data.get(key), res_data.get(key))
