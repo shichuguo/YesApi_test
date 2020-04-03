@@ -37,6 +37,7 @@ class CheckState(unittest.TestCase):
             r = requests.get(url=case.get('url_check'),params=data) #发送get请求
         res = r.text
         results = set_res_data(res)
+        # 断言
         for c in check:
             self.assertIn(c,results) #循环判断结果
 if __name__ == '__main__':
