@@ -11,7 +11,7 @@ import ddt
 import unittest
 import requests
 import random
-import string
+
 
 @ddt.ddt
 class QuitLogin(unittest.TestCase):
@@ -40,7 +40,6 @@ class QuitLogin(unittest.TestCase):
         #添加最新token
         if quit_login_data["token"] == True:
             quit_login_data["token"] = token
-            print(quit_login_data)
         # 如果less存在，获取token长度少1的时候,截取到倒数第二位
         if less:
             quit_login_data["token"] = token[:-2]
@@ -63,9 +62,7 @@ class QuitLogin(unittest.TestCase):
 
         #断言
         results = set_res_data(re.text)
-        print(results)
         for i in check:
-            print(i)
             self.assertIn(i,results)
 
 
