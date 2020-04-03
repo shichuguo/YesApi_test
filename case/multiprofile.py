@@ -34,11 +34,16 @@ class MultiProfile(unittest.TestCase):
         if isinstance(uuid, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            data['uuid'], temp = get_token(url, app_key, username, password)
+            # 如果token与uuid配套
+            if token == 'uuid':
+                data['uuid'], data['token'] = get_token(app_key, username, password, url)
+            # 如果不配套，就只取uuid
+            else:
+                data['uuid'], temp = get_token(app_key, username, password, url)
         if isinstance(token, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            temp, data['token'] = get_token(url, app_key, username, password)
+            temp, data['token'] = get_token(app_key, username, password, url)
 
         # 判断请求方法，并发送请求
         if method == 'get':
@@ -67,14 +72,20 @@ class MultiProfile(unittest.TestCase):
                     if data_key == 'info_list':
                         # 有数据时
                         if m_data.get(data_key) == 'len_uuids':
-                            self.assertEqual(len(res_data.get(data_key)), len(uuids.split(',')))
-                        # 无数据是
+                            # print(res_data)
+                            count = 0
+                            # 通过uuid长度判断合法uuid数量
+                            for i in uuids.split(','):
+                                if len(i) == 32:
+                                    count = count + 1
+                            self.assertEqual(len(res_data.get(data_key)), count)
+                        # 无数据时
                         else:
-                            print(res_data)
-                            self.assertEqual(len(res_data.get(data_key)), m_data.get(key))
+                            self.assertEqual(res_data.get(data_key), m_data.get(data_key))
                     # 处理data的普通数据
                     else:
                         self.assertEqual(m_data.get(key), res_data.get(key))
+
 
 if __name__ == '__main__':
     unittest.main()

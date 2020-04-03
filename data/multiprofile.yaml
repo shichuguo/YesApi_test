@@ -49,7 +49,7 @@
   method: get
   doc: 005，app_key超32位，批量获取会员信息失败
   data:
-    app_key: 756E4045BC42D16FAAAC53E674AA09101
+    app_key: 756E4045BC42D16FAAAC53E674AA099D1
     uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
     uuid: ~
     token: ~
@@ -58,3 +58,97 @@
     data: {}
     msg: 客户端非法请求：app_key.len应该小于等于32
 
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 006，app_key为空，批量获取会员信息失败
+  data:
+    app_key: ~
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+    uuid: ~
+    token: ~
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：缺少必要参数app_key
+
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 007，uuids不存在，批量获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A1
+    uuid: ~
+    token: ~
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+      info_list: []
+
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 008，uuids为空，批量获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ~
+    uuid: ~
+    token: ~
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：缺少必要参数uuids
+
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 010，uuids中uuid长度不合法，批量获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38,098A9CEC2095DB439E9E86181C3355FF1
+    uuid: ~
+    token: ~
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+      info_list: len_uuids
+
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 013，uuid不存在，批量获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A1
+    token: ~
+  assert:
+    ret: 400
+    data: {}
+    msg: 非法请求，参数错误
+
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 014，uuid超32位，批量获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+    token: ~
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：uuid.len应该小于等于32
+
+#- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+#  method: get
+#  doc: 015，uuid超32位，批量获取会员信息失败
+#  data:
+#    app_key: 756E4045BC42D16FAAAC53E674AA099D
+#    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+#    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+#    token: ~
+#  assert:
+#    ret: 400
+#    data: {}
+#    msg: 客户端非法请求：uuid.len应该小于等于32
