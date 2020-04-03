@@ -15,7 +15,7 @@
     - err_code=0
     - '"err_msg="'
   detail:
-    "1退出登录成功"
+    "1get请求_会员退出登录成功"
 - #post请求会员退出登录成功
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -33,7 +33,7 @@
     - err_code=0
     - '"err_msg="'
   detail:
-    "2退出登录成功"
+    "2post请求_会员退出登录成功"
 - #appkey为空格_退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -53,7 +53,7 @@
     - data={}
     - msg=客户端非法请求：缺少必要参数app_key
   detail:
-    "3退出登录失败"
+    "3appkey为空格_退出登录失败"
 - #appkey为不存在的_退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -73,8 +73,8 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "4退出登录失败"
-- #appkey为别人的_退出登录失败
+    "4appkey为不存在的_退出登录失败"
+- #appkey为其他用户的_退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
   username: xuan
@@ -93,7 +93,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "5退出登录失败"
+    "5appkey为其他用户的_退出登录失败"
 - #appkey长度比规定长度小1_退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -113,7 +113,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "6退出登录失败"
+    "6appkey长度比规定长度小1_退出登录失败"
 - #app_key比规定长度多1_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A233
@@ -131,7 +131,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "7退出登录失败"
+    "7app_key比规定长度多1_会员退出登录失败"
 - #app_key含有空格_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -149,7 +149,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "8退出登录失败"
+    "8app_key含有空格_会员退出登录失败"
 - #不存在的uuid_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -167,7 +167,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "9退出登录失败"
+    "9不存在的uuid_会员退出登录失败"
 - #uuid长度少1_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -185,7 +185,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "10退出登录失败"
+    "10uuid长度少1_会员退出登录失败"
 - #uuid长度多1_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -203,7 +203,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "11退出登录失败"
+    "11uuid长度多1_会员退出登录失败"
 - #uuid含有空格_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -221,7 +221,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "12退出登录失败"
+    "12uuid含有空格_会员退出登录失败"
 - #uuid含有特殊字符_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -239,7 +239,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "13退出登录失败"
+    "13退uuid含有特殊字符_会员退出登录失败"
 - #错误的token会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -257,7 +257,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "14退出登录失败"
+    "14错误的token_会员退出登录失败"
 - #token长度少一_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -276,7 +276,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "15退出登录失败"
+    "15token长度少一_会员退出登录失败"
 - #token长度多一_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -295,7 +295,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "16退出登录失败"
+    "16token长度多一_会员退出登录失败"
 
 - #过期token_会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
@@ -315,7 +315,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "17退出登录失败"
+    "17过期token_会员退出登录失败"
 - #token为空会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -333,7 +333,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "18退出登录失败"
+    "18token为空会员退出登录失败"
 - #app_key为null请求会员退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -351,7 +351,7 @@
     - data={}
     - msg=客户端非法请求
   detail:
-    "19退出登录失败"
+    "19app_key为null请求会员退出登录失败"
 - #appkey为空_退出登录失败
   login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
   app_key: D6798673168FBE64767F7FE820970A23
@@ -371,4 +371,4 @@
     - data={}
     - msg=客户端非法请求：缺少必要参数app_key
   detail:
-    "20退出登录失败"
+    "20appkey为空_退出登录失败"
