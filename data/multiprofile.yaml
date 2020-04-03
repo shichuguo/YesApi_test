@@ -1,0 +1,22 @@
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 必选项正确，查单个会员，批量获取会员信息成功
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0
+  assert:
+    ret: 200
+    err_code: 0
+    err_msg: ''
+    info_list: uuids
+- url: http://hn216.api.yesapi.cn/?s=App.User.MultiProfile
+  method: get
+  doc: 必选、可选项都正确，批量获取会员信息成功
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuids: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+  assert:
+    ret: 200
+    err_code: 0
+    err_msg: ''
+    info_list: uuids
