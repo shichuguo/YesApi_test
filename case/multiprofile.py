@@ -25,42 +25,56 @@ class MultiProfile(unittest.TestCase):
         method = cases.get('method').lower()
         data = cases.get('data')
         app_key = data.get('app_key')
+        uuids = data.get('uuids')
         uuid = data.get('uuid')
         token = data.get('token')
         m_assert = cases.get('assert')
-        print(data)
-        # 分开判断非必填
+
+        # 分开组合非必填项
         if isinstance(uuid, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            data[uuid], temp = get_token(app_key, username, password)
+            data['uuid'], temp = get_token(url, app_key, username, password)
         if isinstance(token, dict):
             username = uuid.get('username')
             password = uuid.get('password')
-            temp, data[token] = get_token(app_key, username, password)
+            temp, data['token'] = get_token(url, app_key, username, password)
 
-        print(data)
         # 判断请求方法，并发送请求
         if method == 'get':
             res = requests.get(url, params=data)
         elif method == 'post':
             res = requests.post(url, data=data)
+
         # 获取返回值，并取出其data
         res = res.json()
         res_data = res.get('data')
+        print(res)
+
         # 用例描述
         self._testMethodDoc = cases.get('doc')
+
         # 断言，ret、err_code、err_msg、uuid的个数
         for key in m_assert:
-            if key == 'ret':
-                self.assertEqual(res.get(key), m_assert.get(key))
-            # data下数据
-            elif key == 'err_code' or key == 'err_msg':
-                self.assertEqual(res_data.get(key), m_assert.get(key))
-            # info_list长度
-            elif key == 'info_list':
-                self.assertEqual(len(res_data.get(key)), len(data.get('uuids').split(',')))
-
+            # 处理单层数据
+            if key != 'data' or m_assert.get('data') == {}:
+                self.assertIn(str(m_assert.get(key)), str(res.get(key)))
+            # 处理data多层数据
+            else:
+                m_data = m_assert['data']
+                for data_key in m_data:
+                    # 处理特殊数据info_list
+                    if data_key == 'info_list':
+                        # 有数据时
+                        if m_data.get(data_key) == 'len_uuids':
+                            self.assertEqual(len(res_data.get(data_key)), len(uuids.split(',')))
+                        # 无数据是
+                        else:
+                            print(res_data)
+                            self.assertEqual(len(res_data.get(data_key)), m_data.get(key))
+                    # 处理data的普通数据
+                    else:
+                        self.assertEqual(m_data.get(key), res_data.get(key))
 
 if __name__ == '__main__':
     unittest.main()
