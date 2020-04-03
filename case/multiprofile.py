@@ -54,7 +54,7 @@ class MultiProfile(unittest.TestCase):
         # 获取返回值，并取出其data
         res = res.json()
         res_data = res.get('data')
-        print(res)
+        # print(res)
 
         # 用例描述
         self._testMethodDoc = cases.get('doc')
