@@ -1,0 +1,165 @@
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  w: true
+  doc:
+    01-只设置app_key，获取该app_key最近会员登录列表
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sign: 71D2584DC3E8BC252E5A9CD974E606BD
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  w: true
+  doc:
+    02-设置正确的app_key、sign，获取该app_key最近会员登录列表
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    uuid: 891d3f400c65f0f64b010a0ce54be892
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - uuid=891d3f400c65f0f64b010a0ce54be892
+  w: true
+  doc:
+    03-设置正确的app_key、uuid，获取该uuid的会员信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data1:  #登录参数
+    s: App.User.Login
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    username: yml9
+    password: yml#123
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    token: ''
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - uuid=adf6c41c42edb285be0cb56e57d6f2cd
+  d: true
+  w: true
+  doc:
+    04-设置正确的app_key、token，获取该token的会员信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data1:  #登录参数
+    s: App.User.Login
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    username: yml9
+    password: yml#123
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    token: ''
+    uuid: f66cd6b7b4b791a402004878c6241783
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - uuid=f66cd6b7b4b791a402004878c6241783
+  d: true
+  w: true
+  doc:
+    05-设置正确的app_key、uuid、token，获取满足uuid和token的会员信息,
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    num: 3
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  n: true
+  w: true
+  doc:
+    06-设置正确的app_key、num，获取num设置的会员个数
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sign: 71D2584DC3E8BC252E5A9CD974E60654
+  check:
+    - ret=400
+  doc:
+    07-设置正确的app_key、非法的sign
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    uuid: 71D2584DC3E8BC252E5A9CD974E60654
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - '"members=[]"'
+  w: true
+  doc:
+    08-设置正确的app_key、非法的sign
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    num: 1001
+  check:
+    - ret=400
+  doc:
+    09-设置正确的app_key、num=1001，获取失败
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    num: yy
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - members=[]
+  w: true
+  doc:
+    10-设置正确的app_key、设置非整形的num,获取会员列表信息为空
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetLastestLoginList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2B41
+  check:
+    - ret=406
+    - msg=客户端非法请求：非法app_key，请核对你所在的接口域名
+  doc:
+    11-非法的app_key
+
+

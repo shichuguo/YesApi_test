@@ -9,6 +9,8 @@ import hashlib
 import os
 from setting import *
 import requests
+import time
+import datetime
 
 
 def hash_code(pwd):
@@ -61,3 +63,44 @@ def get_token(app_key, username, password, url):
     uuid = resp.get('data').get('uuid')
     token = resp.get('data').get('token')
     return uuid, token
+def time_difference(day):
+    """
+    获取当前时间与N天前的时间戳的差
+    :param day:
+    :return:
+    """
+    now_time = time.time() #获取当前时间戳
+    #获取前N天的时间戳
+    threeDayAgo = (datetime.datetime.now() - datetime.timedelta(days=day)) # 先获得时间数组格式的日期
+    timeStamp = int(time.mktime(threeDayAgo.timetuple())) # 转换为时间戳
+    time1 =int(now_time - timeStamp)
+    return time1
+
+def reg_time(users_list):
+    """
+    [{},{},{}]获取该类列表中每个字典中某个元素的时间信息，并转换为时间戳，存入另一个列表中
+    :param users_list:
+    :return:
+    """
+    reg_time_list=[]
+    for user in users_list:
+        reg_time = user.get("reg_time")
+        # 转为时间数组
+        timeArray = time.strptime(reg_time, "%Y-%m-%d %H:%M:%S")
+        # 转为时间戳
+        timeStamp = int(time.mktime(timeArray))
+        reg_time_list.append(timeStamp)
+    return reg_time_list
+
+def username_list(users_list):
+    """
+    [{},{},{}]获取该类列表中每个字典中某个元素的
+    信息，存入另一个列表中
+    :param users_list:
+    :return:
+    """
+    username_list=[]
+    for user in users_list:
+        username = user.get("username")
+        username_list.append(username)
+    return username_list
