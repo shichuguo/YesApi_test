@@ -1,0 +1,50 @@
+'''
+@author: liudongjie
+@software: SeleniumTest
+@file: test1.py
+@time: 2020/4/2 22:50
+@desc:
+'''
+
+import unittest
+import requests
+import ddt
+import json
+from lib.utils import *
+from setting import *
+
+@ddt.ddt
+class %(class_name)s(unittest.TestCase):
+
+    @ddt.file_data(DATA_PATH.joinpath('%(data_file)s.yaml'))
+    def test_%(method_name)s(self,**case):
+        url = case.get('url')
+        method = case.get('method')
+        login_data = case.get('login_data')
+        check = case.get('check')
+        if 'password' in login_data and len(login_data['password']) != 32:
+            login_data['password'] = hash_code(login_data['password']) #加密密码
+        if method.lower() == 'post': #判断使用的请求方式
+            res = requests.post(url,data=login_data)
+            resp = res.text
+        else:
+            res = requests.get(url,params=login_data)
+            resp = res.text
+        resp_dict = json.loads(resp)
+        admin_token = resp_dict.get('data').get('token')
+        unsealing_and_title_data = case.get('unsealing_and_title_data')
+        unsealing_and_title_data['admin_token'] = admin_token
+        if method.lower() == 'post': #判断使用的请求方式
+            res1 = requests.post(url,data=unsealing_and_title_data)
+            resp1 = res1.text
+        else:
+            res1 = requests.get(url,params=unsealing_and_title_data)
+            resp1 = res1.text
+            # 断言
+        results = set_res_data(resp1)  # 替换字符串拿到想要的数据
+        for c in check:
+            self.assertIn(c, results)
+
+
+if __name__ == '__main__':
+    unittest.main()
