@@ -11,7 +11,7 @@ from setting import *
 from BeautifulReport import BeautifulReport
 from lib.util import *
 
-creat_case_file('qsj_template.txt')
+# creat_case_file(QSJ_DATA_PATH,'qsj_template.txt')
 _time = time.strftime('%Y-%m-%d %H_%M_%S')
 filename = '小白接口_{}.html'.format(_time)
 discover = unittest.defaultTestLoader.discover(CASE_PATH,pattern='*.py') #创建测试集

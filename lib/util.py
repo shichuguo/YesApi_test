@@ -34,10 +34,10 @@ def set_res_data(res):
         return res.lower().replace('":"', '=').replace('":', '=')
 
 
-def creat_case_file(filename):
+def creat_case_file(PATH,filename):
     '''从data目录中读取多有的yaml文件，使用case_template.txt模板，
     生成测试用例文件，放到case目录下'''
-    file_list = os.listdir(DATA_PATH)
+    file_list = os.listdir(PATH)
     template_file = os.path.join(TEMPLATE_PATH, filename)
     for lis in file_list:
         if lis.endswith('.yaml') or lis.endswith('.yml'):

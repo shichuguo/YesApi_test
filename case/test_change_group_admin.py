@@ -12,9 +12,9 @@ from setting import *
 import os
 import ddt
 @ddt.ddt
-class %(class_name)s(unittest.TestCase):
-    @ddt.file_data(os.path.join(QSJ_DATA_PATH,'%(data_file)s.yaml'))
-    def test_%(method_file)s(self,**case):
+class Change_group_admin(unittest.TestCase):
+    @ddt.file_data(os.path.join(QSJ_DATA_PATH,'change_group_admin.yaml'))
+    def test_change_group_admin(self,**case):
         url = case.get('url')
         method = case.get('method')
         login = case.get('login_data')
