@@ -1,0 +1,215 @@
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+  doc:
+    01-只设置app_key，获取该app_key的所有会员信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sign: 71D2584DC3E8BC252E5A9CD974E606BD
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+  doc:
+    02-设置正确的app_key、sign，获取该app_key的所有会员信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    uuid: 0f44c007c84838f4b61b0eba73de5f6e
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - uuid=0f44c007c84838f4b61b0eba73de5f6e
+  xs:
+    n: false
+  doc:
+    03-设置正确的app_key、uuid，获取该uuid的会员信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data1:  #登录参数
+    s: App.User.Login
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    username: yml9
+    password: yml#123
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    token: ''
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+    d: true
+    m: true
+  doc:
+    04-设置正确的app_key、token，获取该token的会员信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data1:  #登录参数
+    s: App.User.Login
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    username: yml9
+    password: yml#123
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    token: ''
+    uuid: adf6c41c42edb285be0cb56e57d6f2cd
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - uuid=adf6c41c42edb285be0cb56e57d6f2cd
+  xs:
+    n: true
+    d: true
+    m: true
+  doc:
+    05-设置正确的app_key、uuid、token，获取满足uuid和token的会员信息,
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    role: admin
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - role=admin
+  xs:
+    n: true
+  doc:
+    06-设置正确的app_key、role，获取设置的角色会员列表信息
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sort_type: 1
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+    s: true
+  doc:
+    07-设置正确的app_key、sort_type=1，获取的会员列表将注册时间降序排列
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sort_type: 2
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+    s: true
+    sd: true
+  doc:
+    08-设置正确的app_key、sort_type=2，获取的会员列表将按注册时间升序排列
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sort_type: 3
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+    zh: true
+  doc:
+    09-设置正确的app_key、sort_type=3，获取的会员列表将按账号名降序排列
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    sort_type: 4
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  xs:
+    n: true
+    zh: true
+    sd: true
+  doc:
+    10-设置正确的app_key、sort_type=4，获取的会员列表将按账号名升序排列
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2B41
+  check:
+    - ret=406
+    - msg=客户端非法请求：非法app_key，请核对你所在的接口域名
+  xs:
+    n: false
+  doc:
+    11-非法的app_key
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    perpage: 1001
+  check:
+    - ret=400
+  xs:
+    n: false
+  doc:
+    12-设置正确的app_key、perpage=1001,请求失败
+-
+  url: http://hd215.api.yesapi.cn/
+  method: post
+  data:
+    s: App.User.GetList
+    app_key: 4D6F2CB0AF766E6CC0CD7C00FDAB2BA1
+    perpage: ff
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+    - users=[]
+  xs:
+    n: false
+  doc:
+    13-设置正确的app_key、page为非整数

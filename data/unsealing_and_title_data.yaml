@@ -1,0 +1,328 @@
+- #测试填写必填项封号成功
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - err_code=0
+    - ret=200
+    - err_msg=
+    - user_status=0
+- #测试填写必填项解封成功
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 1
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - err_code=0
+    - ret=200
+    - err_msg=
+    - user_status=1
+- #测试填写不存在的app_key封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC333
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=406
+    - msg=客户端非法请求：非法app_key，请核对你所在的接口域名（a.yesapi.cn\/3eir71）
+- #测试填写33位的app_key封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC3333
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - msg=客户端非法请求：app_key.len应该小于等于32, 但现在app_key.len = 33
+- #测试填写app_key为空封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key:
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - msg=客户端非法请求：缺少必要参数app_key
+- #测试填写有特殊字符的app_key封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC33%
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=406
+    - msg=客户端非法请求：非法app_key，请核对你所在的接口域名（a.yesapi.cn\/3eir71）
+- #测试输入错误的user_status封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC33%
+    user_status: 3
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：user_status应该小于等于1, 但现在user_status = 3
+- #测试输入两位数的user_status封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 01
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：user_status应该为一位数, 但现在user_status为两位数
+- #测试输入小数的user_status封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0.1
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：user_status应该小于等于1的整数, 但现在user_status = 0.1
+- #测试输入为空的user_status封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status:
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - msg=客户端非法请求：缺少必要参数user_status
+- #测试输入特殊字符的user_status封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: ￥
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：user_status应该小于等于1, 但现在user_status = ￥
+- #测试输入错误的other_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37111
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：oher_uuid错误或者不存在
+- #测试输入33位的other_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C371111
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - msg=客户端非法请求：other_uuid.len应该小于等于32, 但现在other_uuid.len = 33
+- #测试输入31位的other_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C3711
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：other_uuid.len应该大于或等于32, 但现在other_uuid.len = 31
+- #测试输入为空的other_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid:
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - msg=客户端非法请求：缺少必要参数other_uuid
+- #测试输入33位的other_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C3711%
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E2B
+  check:
+    - ret=400
+    - 客户端非法请求：oher_uuid错误或者不存在
+- #测试填写错误的admin_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E10
+  check:
+    - ret=401
+    - msg=客户端非法请求：登录会话已过期，请重新登录
+- #测试填写33位的admin_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid: 6FF24EB54895FCAF615C6E44EDEA4E101
+  check:
+    - ret=400
+    - 客户端非法请求：admin_uuid.len应该小于等于32, 但现在admin_uuid.len = 33
+- #测试填写为空的admin_uuid封号失败
+  url: http://hn216.api.yesapi.cn/
+  method: post
+  login_data:
+    s: App.User.Login
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    username: admin
+    password: '123456'
+  unsealing_and_title_data:
+    s: App.User.BanUserForAdmin
+    app_key: D3AFABF08FAE0EC1406980A7FB0DC35D
+    user_status: 0
+    other_uuid: 21C8230E01A6E3C805DCAA3919C37C99
+    admin_uuid:
+  check:
+    - ret=400
+    - 客户端非法请求：缺少必要参数admin_uuid
+

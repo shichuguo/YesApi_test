@@ -1,0 +1,305 @@
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: get
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  detail:
+    "1 get请求_清空会员登录会话成功"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  detail:
+    "2 post请求_清空会员登录会话成功"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: 99AA41036C41B864CA81C79F0F15B21C
+    app_key: D6798673168FBE64767F7FE820970A23
+  check:
+    - ret=200
+    - err_code=0
+    - '"err_msg="'
+  detail:
+    "3 输入必填项_清空会员登录会话成功"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: get
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: false
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "4 错误的token_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: BA8688CD226F6AEEC85B6FF1E4D9273
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "5 输入uuid长度少1_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: 99AA41036C41B864CA81C79F0F15B21CF
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "6 输入uuid长度多1_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE8 19E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "7 输入uuid包含空格_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295@
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "8 输入uuid包含特殊字符_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: ~
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "9 输入uuid为空_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: ~
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "10 输入app_key为空_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23M
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "11 输入app_key长度多1_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A2
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "12 输入app_key长度少1_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64 767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "13 输入app_key包含空格_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64@767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "14 输入app_key包含特殊字符_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key:  D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "15 输入app_key开头包含空格_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Log
+    uuid: F4A998020238AFBE819E1A3C2DC9E295
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=404
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "16 输入错误的接口地址_清空会员登录会话失败"
+-
+  login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  app_key: D6798673168FBE64767F7FE820970A23
+  username: xuan
+  password: '123456'
+  clear_session_url: http://hn216.api.yesapi.cn/
+  method: post
+  clear_session_data:
+    s: App.User.Logout
+    uuid: 11111111111111111111111111111111
+    app_key: D6798673168FBE64767F7FE820970A23
+    token: true
+  check:
+    - ret=400
+    - data={}
+    - msg=客户端非法请求
+  detail:
+    "17 uuid不存在_清空会员登录会话失败"

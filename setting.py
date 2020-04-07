@@ -10,10 +10,10 @@ from pathlib import Path
 
 
 BASE_PATH = Path(__file__).absolute().parent  #工程的绝对路径
-
 p = Path(BASE_PATH)
 
 DATA_PATH = p.joinpath("data")      #数据路径
 CASE_PATH = p.joinpath('case')     #用例路径
 REPORT_PATH = p.joinpath('report')  #报告路径
 TEMPLATE_PATH = p.joinpath('template')  #模板路径
+QSJ_DATA_PATH = DATA_PATH.joinpath('qsj_data')  #qsj的路径

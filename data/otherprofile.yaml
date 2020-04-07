@@ -1,0 +1,442 @@
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 001，必选项正确，获取会员信息成功
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 002，必选、可选项都正确，获取会员个人信息成功
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid:
+      username: yuyu
+      password: '123456'
+    token:
+      username: yuyu
+      password: '123456'
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 003，必选项正确，查多个会员，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：other_uuid.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 004，app_key错误，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA0991
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 406
+    data: {}
+    msg: 客户端非法请求：非法app_key
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 005，app_key超32位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D1
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：app_key.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 006，app_key为空，获取会员信息失败
+  data:
+    app_key: ~
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：缺少必要参数app_key
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 007，other_uuid不存在，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ECBF8ABB49D7112A9494CCBDE9AE38A1
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+      info: ~
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 008，other_uuid为空，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ~
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：缺少必要参数other_uuid
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 009，other_uuid超32位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：other_uuid.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 010，uuid不存在，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A1
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 非法请求，参数错误
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 011，uuid超32位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：uuid.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 012，token已过期，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: D1BF3455123346738064CCD35CDED89915637B2E92792C82282ADE5F04F37CFE
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 401
+    data: {}
+    msg: 用户未登录，或登录凭证已过期
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: get
+  doc: 013，token超64位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: B08136906FEFB679F331F1F1B26773000753895FFC82C5207371FD34B39E1C851
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：token.len应该小于等于64
+
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 001，必选项正确，获取会员信息成功
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 002，必选、可选项都正确，获取会员个人信息成功
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid:
+      username: yuyu
+      password: '123456'
+    token:
+      username: yuyu
+      password: '123456'
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 003，必选项正确，查多个会员，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ECBF8ABB49D7112A9494CCBDE9AE38A0,098A9CEC2095DB439E9E86181C3355FF
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：other_uuid.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 004，app_key错误，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA0991
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 406
+    data: {}
+    msg: 客户端非法请求：非法app_key
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 005，app_key超32位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D1
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：app_key.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 006，app_key为空，获取会员信息失败
+  data:
+    app_key: ~
+    uuid: ~
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：缺少必要参数app_key
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 007，other_uuid不存在，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ECBF8ABB49D7112A9494CCBDE9AE38A1
+  assert:
+    ret: 200
+    data:
+      err_code: 0
+      err_msg: ''
+      info: ~
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 008，other_uuid为空，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ~
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：缺少必要参数other_uuid
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 009，other_uuid超32位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: ~
+    other_uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：other_uuid.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 010，uuid不存在，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A1
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 非法请求，参数错误
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 011，uuid超32位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ECBF8ABB49D7112A9494CCBDE9AE38A01
+    token: ~
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：uuid.len应该小于等于32
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 012，token已过期，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: D1BF3455123346738064CCD35CDED89915637B2E92792C82282ADE5F04F37CFE
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 401
+    data: {}
+    msg: 用户未登录，或登录凭证已过期
+
+- login_url: http://hn216.api.yesapi.cn/?s=App.User.Login
+  login_app_key: 756E4045BC42D16FAAAC53E674AA099D
+  url: http://hn216.api.yesapi.cn/?s=App.User.OtherProfile
+  method: post
+  doc: 013，token超64位，获取会员信息失败
+  data:
+    app_key: 756E4045BC42D16FAAAC53E674AA099D
+    uuid: ~
+    token: B08136906FEFB679F331F1F1B26773000753895FFC82C5207371FD34B39E1C851
+    other_uuid:
+      username: ranran
+      password: '123456'
+  assert:
+    ret: 400
+    data: {}
+    msg: 客户端非法请求：token.len应该小于等于64
